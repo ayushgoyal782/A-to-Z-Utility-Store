@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/authnTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        System Administration
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form class="detaildiv"> 
+            <h:commandButton class="button button-editor-solid view-switcher-button detail" onclick="toggle(); return false;" value="All Employee Details"/>
+        </h:form>
+        <script type="text/javascript">
+            function toggle() {
+                var element = document.getElementById('empdetail');
+                if (element.style.display == 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block'
+                }
+            }
+        </script>
+        <div id="empdetail" class="ca">         
+            <h2>Employee Details</h2>
+            <h:dataTable class="table table-striped table-hover" value="#{employeeService.findAll()}" var="employee">
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.id}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="First Name"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.fname}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Name"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.lname}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="UserName"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.user.userName}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Address"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.address}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.email}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Contact No"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.contactno}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Created Date"/>
+                    </f:facet>
+                    <h:outputText value="#{employee.createdDate}">
+                        <f:convertDateTime type="both" dateStyle="short" timeStyle="full" timeZone="#{appConfig.timeZone}"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="No of orders reviewed"/>
+                    </f:facet>
+                    <h:outputText value="#{adminPortalController.countforemployee(employee)}">
+                    </h:outputText>
+                </h:column>
+            </h:dataTable>
+        </div>
+        <h:form class="detaildiv"> 
+            <h:commandButton class="button button-editor-solid view-switcher-button detail" onclick="toggle1(); return false;" value="All Customer details"/>
+        </h:form>
+        <script type="text/javascript">
+            function toggle1() {
+                var element = document.getElementById('custdetail');
+                if (element.style.display == 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block'
+                }
+            }
+        </script>
+        <div id="custdetail" class="ca">            
+            <h2>Customer Details</h2>
+            <h:dataTable class="table table-striped table-hover" value="#{customerService.findAll()}" var="customer">
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.id}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="First Name"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.fname}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Name"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.lname}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="UserName"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.user.userName}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Address"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.address}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.email}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Contact No"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.contactno}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Number of orders placed"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.invoice.size()}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Created Date"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.createdDate}">
+                        <f:convertDateTime type="both" dateStyle="short" timeStyle="full" timeZone="#{appConfig.timeZone}"/>
+                    </h:outputText>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </ui:define>
+
+</ui:composition>

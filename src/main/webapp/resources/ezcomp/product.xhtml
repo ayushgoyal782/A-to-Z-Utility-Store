@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="product" required="true" type="edu.iit.sat.itmd4515.agoyal18.domain.Productdetails"/>
+        <cc:attribute name="readonly" type="java.lang.Boolean" default="true" required="false"/>
+        <cc:attribute name="action" required="false" method-signature="java.lang.String action()"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="productName" value="Name"/>
+                <h:inputText 
+                    class="form-control" 
+                    id="productName" 
+                    value="#{cc.attrs.product.productdescription}"
+                    readonly="#{cc.attrs.readonly ? 'true' : 'false'}"/>
+                <h:message for="productName" style="color:red"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="productPrice" value="Price"/>
+                <h:inputText 
+                    class="form-control" 
+                    id="productPrice" 
+                    value="#{cc.attrs.product.price}"
+                    readonly="#{cc.attrs.readonly ? 'true' : 'false'}"/>
+                <h:message for="productPrice" style="color:red"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="productQuantity" value="Quantity"/>
+                <h:inputText 
+                    class="form-control" 
+                    id="productQuantity" 
+                    value="#{cc.attrs.product.quantity}"
+                    readonly="#{cc.attrs.readonly ? 'true' : 'false'}"/>
+                <h:message for="productQuantity" style="color:red"/>
+            </h:panelGroup>
+            <h:panelGroup layout="block" class="form-group">
+                <h:outputLabel for="productImage" value="Image Path"/>
+                <h:inputText 
+                    class="form-control" 
+                    id="productImage" 
+                    value="#{cc.attrs.product.image}"
+                    readonly="#{cc.attrs.readonly ? 'true' : 'false'}"/>
+                <h:message for="productImage" style="color:red"/>
+            </h:panelGroup>
+            <h:commandButton 
+                rendered="#{not cc.attrs.readonly}"
+                class="btn btn-default button button-editor-solid" 
+                action="#{cc.attrs.action}" 
+                value="Save"/>
+        </h:form>
+    </cc:implementation>
+</html>

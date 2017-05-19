@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/templates/publicTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+        A to Z Utility Store
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>User Login</h1>
+
+        <h:form class="form-signin">
+            <h:panelGroup styleClass="#{j_username.valid ? 'form-group' : 'form-group has-error'}" layout="block">
+                <h:outputLabel class="control-label" for="j_username" value="Username"/>
+                <span class="fontawesome-user"></span>
+                <h:inputText binding="#{j_username}" class="form-control" id="j_username" value="#{loginController.username}"/>
+                <h:message for="j_username" style="color:red"/>
+            </h:panelGroup>
+            <h:panelGroup styleClass="#{j_password.valid ? 'form-group' : 'form-group has-error'}" layout="block">
+                <h:outputLabel class="control-label" for="j_password" value="Password"/>
+                <h:inputSecret binding="#{j_password}" class="form-control" id="j_password" value="#{loginController.password}"/>
+                <h:message for="j_password" style="color:red"/>
+            </h:panelGroup>
+            <h:commandButton class="button button-editor-solid view-switcher-button" value="Login" action="#{loginController.doLogin()}"/>
+            <div class="javadoc"><a href="/agoyal18-fp/JavaDoc/apidocs/index.html" >For JavaDoc Click here</a></div>
+        </h:form>
+        
+        
+        
+    </ui:define>
+
+</ui:composition>

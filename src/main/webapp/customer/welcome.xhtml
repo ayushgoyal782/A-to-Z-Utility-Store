@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/templates/authnTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Customer Welcome
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:form class="detaildiv"> 
+            <h:commandButton class="button button-editor-solid view-switcher-button detail" onclick="toggle(); return false;" value="User Profile"/>
+        </h:form>
+        <script type="text/javascript">
+            function toggle() {
+                var element = document.getElementById('custdetail');
+                if (element.style.display == 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block'
+                }
+            }
+        </script>
+        <div id="custdetail" class="ca"> 
+            <h2>Details</h2>
+            <h:dataTable class="table" value="#{customerService.findByUsername(loginController.remoteUser)}" var="customer">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.id}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="First Name"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.fname}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Last Name"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.lname}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="UserName"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.user.userName}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Address"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.address}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Email"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.email}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Contact No"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.contactno}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Number of orders placed"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.invoice.size()}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Created Date"/>
+                    </f:facet>
+                    <h:outputText value="#{customer.createdDate}">
+                        <f:convertDateTime type="both" dateStyle="short" timeStyle="full" timeZone="#{appConfig.timeZone}"/>
+                    </h:outputText>
+                </h:column>
+            </h:dataTable>
+        </div>
+        <h:form class="detaildiv"> 
+            <h:commandButton class="button button-editor-solid view-switcher-button detail" onclick="toggle1(); return false;" value="Order History"/>
+        </h:form>
+        <script type="text/javascript">
+            function toggle1() {
+                var element = document.getElementById('detaildiv1');
+                if (element.style.display == 'block') {
+                    element.style.display = 'none';
+                } else {
+                    element.style.display = 'block'
+                }
+            }
+            </script>
+        <div id="detaildiv1" class="ca">
+            <h2>Your Order Details</h2>
+            <h:dataTable class="table " value="#{customerPortalController.customer.invoice}" var="invoice">
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Order Id"/>
+                    </f:facet>
+                    <h:outputText value="#{invoice.sno}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Date"/>
+                    </f:facet>
+                    <h:outputText value="#{invoice.date}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Total"/>
+                    </f:facet>
+                    <h:outputText value="#{invoice.total}">
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Click"/>
+                    </f:facet>
+                    <h:form>
+                        <h:commandLink action="#{customerPortalController.doViewOrder(invoice)}" value="View "/>
+                        <h:commandLink action="#{customerPortalController.doUpdateOrder(invoice)}" value="Update "/>
+                        <h:commandLink action="#{customerPortalController.doDeleteOrder(invoice)}" value="Delete "/>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </ui:define>
+
+
+</ui:composition>
